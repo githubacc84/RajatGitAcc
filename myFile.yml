@@ -1,43 +1,17 @@
 ---
-
 - hosts: all
   become: yes
   gather_facts: yes
   tasks:
-  - name: install webserver
-    apt: 
-       name: apache2
-       state: present
+    - name: install webserver
+      apt:
+        name: apache2
+        state: present
+      when: ansible_os_family=="Debian"
 
-  
+    - name: start webserver
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      service: 
+        name:apache2
+        start:restart
+      when: ansible_os_family=="Redhat"
